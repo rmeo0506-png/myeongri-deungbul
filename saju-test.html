@@ -1,37 +1,67 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>명리등불 | 사주 시험</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>명리등불 | 사주 입력 시험</title>
+<style>
+:root{color-scheme:dark;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#101b30;color:#f7f0df;line-height:1.65}
+main{max-width:540px;margin:55px auto;padding:28px 22px;background:#1b2a42;border:1px solid #a88749;border-radius:18px}
+h1{color:#f3ce80;text-align:center;margin:0;font-size:2.2rem}header p{text-align:center;color:#d8c8a9;margin:0 0 30px}
+h2{font-size:1.3rem;margin:0 0 18px}label{display:block;margin:16px 0 6px;font-weight:bold}
+input,select{display:block;width:100%;min-height:46px;border:1px solid #9d9a94;border-radius:9px;padding:10px;background:#f9f9f5;color:#172138;font-size:1rem}
+button{width:100%;margin-top:24px;background:#e5bd6a;color:#142038;border:0;border-radius:9px;padding:13px;font-weight:bold;font-size:1.05rem;cursor:pointer}
+button:hover{background:#f8d58e}.hint{font-size:.88rem;color:#d9cbb3}
+#result{margin-top:20px;padding:15px;border-radius:10px;background:#263a55;white-space:pre-line;min-height:50px}
+a{color:#f2cf83}footer{text-align:center;margin-top:22px;color:#b7b5b0;font-size:.82rem}
+</style>
 </head>
 <body>
-  <h1>명리등불</h1>
-  <p>흐르는 삶에, 등불 하나.</p>
-
-  <h2>나의 사주 알아보기</h2>
-  <label for="birth">생년월일</label>
-  <input type="date" id="birth">
-
-  <button type="button" onclick="showBirth()">
-    확인하기
-  </button>
-
-  <p id="result"></p>
-
-  <script>
-    function showBirth() {
-      const birth = document.getElementById("birth").value;
-      const result = document.getElementById("result");
-
-      if (!birth) {
-        result.textContent = "생년월일을 입력해 주세요.";
-        return;
-      }
-
-      result.textContent = "입력한 생년월일: " + birth;
-    }
-  </script>
+<main>
+<header><h1>명리등불</h1><p>흐르는 삶에, 등불 하나.</p></header>
+<h2>나의 사주 알아보기 — 입력 시험</h2>
+<form id="sajuForm">
+<label for="birth">생년월일</label>
+<input id="birth" type="date" required>
+<label for="calendar">달력 종류</label>
+<select id="calendar"><option value="양력">양력</option><option value="음력">음력 (계산 준비 중)</option></select>
+<label for="time">태어난 시간</label>
+<select id="time">
+<option value="">시간을 선택해 주세요</option>
+<option value="모름">모름</option>
+<option value="00:00">00:00</option>
+<option value="01:00">01:00</option>
+<option value="03:00">03:00</option>
+<option value="05:00">05:00</option>
+<option value="07:00">07:00</option>
+<option value="09:00">09:00</option>
+<option value="11:00">11:00</option>
+<option value="13:00">13:00</option>
+<option value="15:00">15:00</option>
+<option value="17:00">17:00</option>
+<option value="19:00">19:00</option>
+<option value="21:00">21:00</option>
+<option value="23:00">23:00</option>
+</select>
+<p class="hint">현재는 입력 시험 단계입니다. 시간 선택은 두 시간 간격의 대표값이며, 정확한 사주 계산은 아직 제공하지 않습니다.</p>
+<button type="submit">입력 내용 확인하기</button>
+</form>
+<div id="result" role="status" aria-live="polite">생년월일을 입력하고 확인 버튼을 눌러 주세요.</div>
+<p class="hint">이 시험 페이지는 입력 정보를 서버로 전송하거나 저장하지 않습니다. 화면을 닫으면 입력 내용은 사라집니다.</p>
+<footer><a href="./index.html">명리등불 첫 화면으로 돌아가기</a></footer>
+</main>
+<script>
+document.getElementById('sajuForm').addEventListener('submit',function(event){
+event.preventDefault();
+const birth=document.getElementById('birth').value;
+const calendar=document.getElementById('calendar').value;
+const time=document.getElementById('time').value;
+const result=document.getElementById('result');
+if(!birth){result.textContent='생년월일을 입력해 주세요.';return;}
+if(calendar==='음력'){result.textContent='음력 생일의 정확한 변환 기능은 준비 중입니다. 현재는 양력 입력만 시험해 주세요.';return;}
+result.textContent='입력 확인 완료!\n생년월일: '+birth+' (양력)\n태어난 시간: '+(time||'선택하지 않음')+'\n\n사주팔자 계산 기능은 다음 개발 단계에서 추가합니다.';
+});
+</script>
 </body>
 </html>

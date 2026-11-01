@@ -31,7 +31,7 @@ if(!name||!year||!month||!day||hour==='unknown')return;
 const data={name,gender:document.getElementById('gender').value,cal:document.getElementById('cal').value,year,month,day,hour,minute,created:Date.now()};
 const encoded=encodeURIComponent(JSON.stringify(data));
 let a=document.getElementById('ownerContinue');
-if(!a){a=document.createElement('a');a.id='ownerContinue';a.className='action secondary';a.style.textAlign='center';a.style.textDecoration='none';a.textContent='🔒 관리자 사이트에서 이 사람 이어보기';document.getElementById('stage4').append(a)}
+if(!a){a=document.createElement('a');a.id='ownerContinue';a.className='action secondary';a.style.textAlign='center';a.style.textDecoration='none';a.textContent='✧ 나의 명리등불, 더 깊이 밝히기';a.style.display='none';document.getElementById('stage4').append(a)}
 a.href=ADMIN+'#person='+encoded;
 }
 document.getElementById('form').addEventListener('submit',()=>setTimeout(save,100));

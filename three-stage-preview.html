@@ -45,6 +45,9 @@ function restoreBirth(){
  }catch(e){}
 }
 restoreBirth();
+window.addEventListener('pageshow',restoreBirth);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')rememberBirth()});
+window.addEventListener('pagehide',rememberBirth);
 $('form').addEventListener('input',rememberBirth);
 $('form').addEventListener('change',rememberBirth);
 $('picker').addEventListener('click',()=>setTimeout(rememberBirth,0));
@@ -65,8 +68,8 @@ const data={name,gender:document.getElementById('gender').value,cal:document.get
 const encoded=encodeURIComponent(JSON.stringify(data));
 let a=document.getElementById('ownerContinue');
 if(!a){a=document.createElement('a');a.id='ownerContinue';a.className='action secondary';a.style.textAlign='center';a.style.textDecoration='none';a.textContent='✧ 나의 명리등불, 더 깊이 밝히기';a.style.display='none';document.getElementById('stage4').append(a)}
-a.href=ADMIN+'#person='+encoded;
+a.href=ADMIN+'#person='+encoded; a.style.display=new URLSearchParams(location.search).get('owner')==='1'?'block':'none';
 }
-document.getElementById('form').addEventListener('submit',()=>setTimeout(save,100));
+document.getElementById('form').addEventListener('submit',()=>{rememberBirth();setTimeout(save,100)});
 })();
 </script></body></html>

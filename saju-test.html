@@ -3,10 +3,35 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>명리등불 사주 계산 시험</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>명리등불 | 사주 시험</title>
 </head>
 <body>
   <h1>명리등불</h1>
-  <p>사주 계산 기능을 준비하고 있습니다.</p>
+  <p>흐르는 삶에, 등불 하나.</p>
+
+  <h2>나의 사주 알아보기</h2>
+  <label for="birth">생년월일</label>
+  <input type="date" id="birth">
+
+  <button type="button" onclick="showBirth()">
+    확인하기
+  </button>
+
+  <p id="result"></p>
+
+  <script>
+    function showBirth() {
+      const birth = document.getElementById("birth").value;
+      const result = document.getElementById("result");
+
+      if (!birth) {
+        result.textContent = "생년월일을 입력해 주세요.";
+        return;
+      }
+
+      result.textContent = "입력한 생년월일: " + birth;
+    }
+  </script>
 </body>
 </html>
